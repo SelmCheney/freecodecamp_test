@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+  <script src="https://cdn.jsdelivr.net/npm/vue"></script>
+</head>
+  <style>
+    body{
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+  </style>
+<body>
+    <div id="quote-box">
+        <div  id="text">{{currentQuote.text}}</div><br>
+        <div  id="author">{{currentQuote.author}}</div><br>
+      <div @click="newQuoteClicked" id="new-quote"><a>new quote</a></div><br>
+        <div  id="tweet-quote" @click="tweetQuoteClicked"><a target="_blank" :href="'https://twitter.com/intent/tweet?hashtags=quotes&related=freecodecamp&text='+currentQuote.text+' '+currentQuote.author">tweet<a/></div><br>
+        <div  id="text"></div><br>
+   <div>
+     <script>
+       var quotes =[
+         {text:"自己不能胜任的事情，切莫轻易答应别人，一旦答应了别人，就必须实践自己的诺言。",author:"华盛顿"},
+         {text:"君子在下位则多谤，在上位则多誉；小人在下位则多誉，在上位则多谤。",author:"柳宗元"},
+         {text:"你若要喜爱你自己的价值，你就得给世界创造价值。",author:"歌德"},
+　       {text:"君子赠人以言，庶人赠人以财。",author:"荀况"},
+         {text:"时间会刺破青春表面的彩饰，会在美人的额上掘深沟浅槽；会吃掉稀世之珍！天生丽质，什么都逃不过他那横扫的镰刀。",author:"莎士比亚"},
+       ];
+       function randomNum(){
+          var radIdx =parseInt( Math.random()*5);
+         if(radIdx<1){
+           radIdx=1;
+         }
+         if(radIdx>4){
+           radIdx=4;
+         }
+         return radIdx;
+       };
+      
+      var app = new Vue({
+         data(){
+           return {
+             currentQuote:quotes[randomNum()]
+           }
+         },
+         el:"#quote-box",
+         methods:{
+           mounted(){
+              this.currentQuote = quotes[randomNum()];
+             console.log( this.currentQuote)
+           },
+           newQuoteClicked(){
+              this.currentQuote = quotes[randomNum()];
+           },
+           tweetQuoteClicked(){
+             
+           }
+         }
+       })
+     </script>
+</body>
+</html>
